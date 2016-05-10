@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Darkholme V</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<meta name="robots" content="noindex">
+</head>
+<body>
+<div class="welcome">Please Select A Service</div>
+<?php
+$host = $_SERVER["SERVER_NAME"];
+function drawServiceLink($data,$status) {
+	echo '<div class="service';
+	if(!$status) {
+		echo " service_down";
+	}
+	echo '">';
+    if(array_key_exists("address",$data)) {
+        $link = $data["address"];
+    } else {
+        if(array_key_exists("port",$data)) {
+            if(array_key_exists("ssl",$data) && $data["ssl"]) {
+                $link = "https://";
+            } else {
+                $link = "http://";
+            }
+            
+            $link .= $_SERVER["SERVER_NAME"].":".$data["port"];
+        } else {
+            // can't go on
+        }
+    }
+    if(isset($link)) {
+	    echo '<a href="'.$link.'">';
+    }
+	if(array_key_exists("image",$data)) {
+		echo '<img src="'.$data["image"].'" alt="'.$data["name"].'" title="'.$data["name"].'" />';
+	} else {
+		echo $data["name"];
+	}
+    if(isset($link)) {
+    	echo '</a>';
+    }
+	echo '</div>';
+}
+
+function testPort($port) {
+	$output = Array();
+	exec("nc -v -w 5 192.168.1.10 ".$port." < /dev/null",$output,$rv);
+    if($rv > 0) {
+        exec("nc -v -w 5 localhost ".$port." < /dev/null",$output,$rv);
+    }
+	return $rv == 0;
+}
+
+global $hosted;
+$hosted = Array();
+$hosted["OwnCloud"] = Array("name"=>"OwnCloud",
+				"address"=>"http://cloud.".$host."/",
+				"image"=>"http://cloud.".$host."/core/img/logo-wide.svg",
+				"type"=>"service");
+
+$hosted["MySQL"] = Array("name"=>"MySQL",
+                                "address"=>"phpmyadmin/",
+                                "image"=>"images/MySQL.svg",
+				"port"=>3306,
+                                "type"=>"service");
+
+
+$hosted["SSH"] = Array("name"=>"SSH",
+                                "address"=>"ssh://". $_SERVER["SERVER_NAME"],
+                                "port"=>22,
+                                "type"=>"service");
+
+$hosted["Webmin"] = Array("name"=>"Webmin",
+                                "image"=>"images/webmin.png",
+                                "port"=>10000,
+                                "ssl"=>true,
+                                "type"=>"service");
+
+$hosted["Jenkins"] = Array("name"=>"Jenkins",
+				"address"=>"http://jenkins.".$host."/",
+                                "image"=>"images/jenkins.svg",
+                                "port"=>8080,
+                                "type"=>"service");
+
+$hosted["Transmission"] = Array("name"=>"Transmission",
+                                "image"=>"images/transmission.png",
+				"address"=>"http://torrent.".$host."/",
+                                "port"=>9091,
+                                "type"=>"service");
+
+
+$hosted["Cloud9"] = Array("name"=>"Cloud9",
+                                "image"=>"images/logo_cloud9.png",
+				"address"=>"http://c9.".$host."/",
+                                "port"=>3000,
+                                "type"=>"service");
+                                
+$hosted["Catalog"] = Array("name"=>"Catalog",
+    			"address"=>"http://catalog.".$host."/",
+                                "type"=>"site");
+$hosted["Shimmie"] = Array("name"=>"Shimmie",
+                                "address"=>"http://shimmie.".$host."/",
+                                "type"=>"site");
+$hosted["Legacy"] = Array("name"=>"Legacy",
+                                "address"=>"http://legacy.".$host."/",
+                                "type"=>"site");
+
+
+
+$hosted["BTSync"] = Array("name"=>"BTSync",
+                                "image"=>"images/btsync.png",
+				"address"=>"http://btsync.".$host."/",
+                                "port"=>8888,
+                                "type"=>"service");
+
+
+
+$hosted["DynMap"] = Array("name"=>"DynMap",
+                                "address"=>"http://dynmap.".$host."/?worldname=primus",
+                                "port"=>8123,
+                                "type"=>"service");
+
+
+function drawLinks($type) {
+global $hosted;
+foreach($hosted as $service) {
+        if($service["type"]==$type) {
+        $status = true;
+        if(array_key_exists("port",$service)) {
+                $status = testPort($service["port"]);
+        }
+
+        drawServiceLink($service,$status);
+        }
+}
+
+}
+?>
+
+<div class="services">
+<?php
+ksort($hosted);
+drawLinks("service");
+?>
+</div>
+<div class="welcome">
+Or A Site
+</div>
+<div class="sites">
+<?php
+drawLinks("site");
+
+?>
+</div>
+</div>
+</body>
+</html>

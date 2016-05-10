@@ -1,0 +1,49 @@
+        body{
+            background-image: url('images/b6375e3bf4e993e9e3fabf32692f900c.jpg');
+            background-size: cover;
+            background-position: right center;
+        }
+
+
+body {
+	background-color:black;
+	text-align:center;
+    color:white;
+    font-family:sans-serif;
+}
+
+.welcome {
+    width:100%;
+    font-size:50px;
+    
+}
+.services {
+    text-align:center;
+    width:100%;
+}
+
+.service {
+	width:147px;
+	height:75px;
+	
+	text-align:center;
+	display:table-cell; 
+    vertical-align:middle;
+    padding:5px;
+}
+.service a {
+	display:block;
+	width:100%;
+	height:100%;
+}
+.service:hover {
+	background-color:#729fcf;
+}
+
+.service_down img {
+	opacity:0.5;
+}
+.service img {
+	max-width:147px;
+	max-height:75px;
+}
