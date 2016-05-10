@@ -6,7 +6,7 @@ library reflectable_generated_main_library;
 import "dart:core";
 import "index.bootstrap.initialize_reflectable_original_main.dart" as original show main;
 import 'dart:html' as prefix6;
-import 'package:darkholme_dart/main_app.dart' as prefix4;
+import 'package:darkholme/main_app.dart' as prefix4;
 import 'package:polymer/polymer_micro.dart' as prefix2;
 import 'package:polymer/src/common/js_proxy.dart' as prefix0;
 import 'package:polymer/src/common/polymer_mixin.dart' as prefix1;

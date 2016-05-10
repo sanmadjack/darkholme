@@ -29,8 +29,12 @@ import 'package:polymer/src/template/dom_bind.dart' as i25;
 import 'package:polymer/src/template/dom_if.dart' as i26;
 import 'package:polymer/src/template/dom_repeat.dart' as i27;
 import 'package:polymer/polymer.dart' as i28;
-import 'package:darkholme_dart/main_app.dart' as i29;
+import 'package:darkholme/main_app.dart' as i29;
 import 'package:polymer/src/common/polymer_register.dart' as i30;
+import 'package:polymer_elements/iron_flex_layout/classes/iron_shadow_flex_layout.dart'
+    as i31;
+import 'package:polymer_elements/iron_flex_layout/classes/iron_flex_layout.dart'
+    as i32;
 
 main() {
   initializers.addAll([

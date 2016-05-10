@@ -1,6 +1,6 @@
-library darkholme.web.index_bootstrap_dart;
+library darkholme.web._403_bootstrap_dart;
 
 import 'package:polymer_elements/roboto.dart' as i0;
-import 'index.dart' as i1;
+import 'error.dart' as i1;
 
 main() => i1.main();

@@ -10,7 +10,8 @@ body {
     user-select: none;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-touch-callout: none;
-
+}
+div.content {
     background-image: url('images/raven/b6375e3bf4e993e9e3fabf32692f900c.jpg');
     background-size: cover;
     background-position: right center;

@@ -1,0 +1,28 @@
+<!--
+  Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
+  is governed by a BSD-style license that can be found in the LICENSE file.
+-->
+
+<dom-module id="error-element">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+
+  <template>
+      <paper-header-panel class="main" main mode="waterfall">
+        <paper-toolbar >
+            <span class="title">Dartalog</span>
+        </paper-toolbar>
+
+      <div class="content fit">
+      <paper-card heading="Error" hidden="true" id="errorCard">
+      <div class="card-content" id="errorContents">Words</div>
+        </paper-card>
+        </div>
+
+      </paper-header-panel>
+
+  </template>
+</dom-module>
